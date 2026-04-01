@@ -1,65 +1,19 @@
 /* ==========================================
-   1. ПОДКЛЮЧЕНИЕ ШРИФТОВ (С ПРОВЕРКОЙ ПУТЕЙ)
-   ========================================== */
-
-@font-face {
-    font-family: 'GrtskGiga';
-    src: url('./GrtskGiga-Regular.ttf') format('truetype');
-    font-weight: 400;
-}
-@font-face {
-    font-family: 'GrtskGiga';
-    src: url('./GrtskGiga-Medium.ttf') format('truetype');
-    font-weight: 500;
-}
-@font-face {
-    font-family: 'GrtskGiga';
-    src: url('./GrtskGiga-Bold.ttf') format('truetype');
-    font-weight: 700;
-}
-@font-face {
-    font-family: 'CSTM';
-    src: url('./CSTM-Italic.otf.otf') format('opentype'); 
-    font-weight: normal;
-}
-
-/* ==========================================
-   2. ОБНОВЛЕННАЯ ДИЗАЙН-СИСТЕМА
+   ОБНОВЛЕННАЯ ТИПОГРАФИКА (FASHION MIX)
    ========================================== */
 
 :root {
     --bg-wine: #2B0011;
     --accent-red: #FF0022;
     --text-light: #F5F5F5;
-    --font-heading: 'GrtskGiga', sans-serif;
-    --font-accent: 'CSTM', serif;
+    
+    /* Основной голос — дерзкий курсив */
+    --font-main: 'CSTM', serif; 
+    /* Акцент для слова ПЛАНЫ — мощный гротеск */
+    --font-bold: 'GrtskGiga', sans-serif;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-color: var(--bg-wine);
-    color: var(--text-light);
-    font-family: var(--font-heading);
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-}
-
-/* Пленочный шум (чуть прозрачнее) */
-.noise-overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    pointer-events: none; z-index: 9999; opacity: 0.03;
-    background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
-}
-
-/* ==========================================
-   3. ГЛАВНЫЙ ЭКРАН (REFINED LUXURY)
-   ========================================== */
+/* ... (базовые стили body и noise оставляем) ... */
 
 .hero-section {
     position: relative;
@@ -67,46 +21,52 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Распределяем элементы по краям */
-    padding: 6vh 4vw; /* Больше отступов от краев экрана */
+    justify-content: center; /* Теперь всё плотно в центре */
+    align-items: center;
+    padding: 2rem;
 }
 
-/* Монограмма (логотип) */
 .hero-monogram {
-    width: 100px;
-    height: 70px;
+    position: absolute;
+    top: 5vh;
+    width: 90px;
+    height: 65px;
     border: 1px solid var(--accent-red);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0;
-    align-self: center; /* Центрируем только лого */
 }
 
 .hero-monogram span {
-    font-family: var(--font-accent);
-    font-size: 2.8rem;
+    font-family: var(--font-main);
+    font-size: 2.5rem;
     color: var(--accent-red);
-    display: block;
-    margin-top: -8px; /* Выравниваем букву внутри овала */
-}
-
-/* Контейнер заголовка */
-.hero-title-container {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    font-style: italic;
+    margin-top: -5px;
 }
 
 .hero-title {
-    font-size: clamp(3rem, 7.5vw, 9rem);
-    font-weight: 700;
+    font-family: var(--font-main);
+    font-weight: normal;
+    font-style: italic; /* Весь заголовок по дефолту курсивный */
+    font-size: clamp(3.5rem, 10vw, 12rem); /* Делаем шрифт ОГРОМНЫМ */
     text-transform: uppercase;
-    line-height: 1.05; /* Увеличили, чтобы не слипалось */
-    letter-spacing: -0.04em;
+    line-height: 0.85; /* Экстремально плотно, как на скрине */
     text-align: center;
+    color: var(--accent-red); /* В твоем референсе всё красное */
+}
+
+/* Специфический стиль для слова ПЛАНЫ */
+.font-plans {
+    font-family: var(--font-bold);
+    font-weight: 700;
+    font-style: normal; /* Убираем курсив для этого слова */
+    font-size: clamp(4rem, 12vw, 15rem); /* Оно должно быть шире и массивнее */
+    letter-spacing: -0.05em;
+    display: block; /* Выносим на отдельную строку */
+    margin: 0.1em 0;
 }
 
 .hero-title .line {
@@ -119,13 +79,13 @@ body {
     transform: translateY(110%);
 }
 
-/* Подзаголовок (внизу экрана) */
 .hero-subtitle {
-    font-size: 0.75rem;
-    font-weight: 400;
+    position: absolute;
+    bottom: 5vh;
+    font-family: var(--font-bold); /* Маленький текст лучше в гротеске */
+    font-size: 0.7rem;
     text-transform: uppercase;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.4em;
     opacity: 0;
-    text-align: center;
-    color: rgba(245, 245, 245, 0.4);
+    color: rgba(255, 255, 255, 0.3);
 }
