@@ -1,52 +1,39 @@
 /* ==========================================
-   1. ПОДКЛЮЧЕНИЕ ШРИФТОВ
+   1. ПОДКЛЮЧЕНИЕ ШРИФТОВ (С ПРОВЕРКОЙ ПУТЕЙ)
    ========================================== */
 
 @font-face {
     font-family: 'GrtskGiga';
-    src: url('GrtskGiga-Regular.ttf') format('truetype');
+    src: url('./GrtskGiga-Regular.ttf') format('truetype');
     font-weight: 400;
 }
-
 @font-face {
     font-family: 'GrtskGiga';
-    src: url('GrtskGiga-Medium.ttf') format('truetype');
+    src: url('./GrtskGiga-Medium.ttf') format('truetype');
     font-weight: 500;
 }
-
 @font-face {
     font-family: 'GrtskGiga';
-    src: url('GrtskGiga-Bold.ttf') format('truetype');
+    src: url('./GrtskGiga-Bold.ttf') format('truetype');
     font-weight: 700;
 }
-
 @font-face {
     font-family: 'CSTM';
-    /* Используем имя файла с двойным расширением, как на твоем скрипте */
-    src: url('CSTM-Italic.otf.otf') format('opentype'); 
+    src: url('./CSTM-Italic.otf.otf') format('opentype'); 
     font-weight: normal;
-    font-style: italic;
 }
 
 /* ==========================================
-   2. ДИЗАЙН-СИСТЕМА (ЦВЕТА И ПЕРЕМЕННЫЕ)
+   2. ОБНОВЛЕННАЯ ДИЗАЙН-СИСТЕМА
    ========================================== */
 
 :root {
-    --bg-wine: #2B0011;      /* Глубокий винный фон [cite: 7, 9] */
-    --accent-red: #FF0022;   /* Электрический красный для акцентов [cite: 2, 4, 11] */
-    --text-light: #F5F5F5;   /* Светло-серый для чтения */
-    --pure-black: #000000;
-    
-    /* Шрифты из твоих файлов */
+    --bg-wine: #2B0011;
+    --accent-red: #FF0022;
+    --text-light: #F5F5F5;
     --font-heading: 'GrtskGiga', sans-serif;
     --font-accent: 'CSTM', serif;
-    --font-text: 'GrtskGiga', sans-serif;
 }
-
-/* ==========================================
-   3. ГЛОБАЛЬНЫЕ СТИЛИ
-   ========================================== */
 
 * {
     margin: 0;
@@ -57,73 +44,71 @@
 body {
     background-color: var(--bg-wine);
     color: var(--text-light);
-    font-family: var(--font-text);
-    line-height: 1.5;
+    font-family: var(--font-heading);
     overflow-x: hidden;
-    -webkit-font-smoothing: antialiased; /* Делает шрифты более четкими */
+    -webkit-font-smoothing: antialiased;
 }
 
-/* Эффект пленочного зерна (Overlay) */
+/* Пленочный шум (чуть прозрачнее) */
 .noise-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.05;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none; z-index: 9999; opacity: 0.03;
     background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
 }
 
 /* ==========================================
-   4. SECTION: HERO (ГЛАВНЫЙ ЭКРАН)
+   3. ГЛАВНЫЙ ЭКРАН (REFINED LUXURY)
    ========================================== */
 
 .hero-section {
     position: relative;
     width: 100vw;
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-    text-align: center;
+    justify-content: space-between; /* Распределяем элементы по краям */
+    padding: 6vh 4vw; /* Больше отступов от краев экрана */
 }
 
-/* Монограмма «П» в овале [cite: 3, 5, 6] */
+/* Монограмма (логотип) */
 .hero-monogram {
-    width: clamp(80px, 10vw, 120px);
-    height: clamp(60px, 7vw, 90px);
+    width: 100px;
+    height: 70px;
     border: 1px solid var(--accent-red);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 3rem;
-    opacity: 0; /* Для анимации GSAP */
+    opacity: 0;
+    align-self: center; /* Центрируем только лого */
 }
 
 .hero-monogram span {
     font-family: var(--font-accent);
-    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-size: 2.8rem;
     color: var(--accent-red);
-    transform: translateY(-5px);
+    display: block;
+    margin-top: -8px; /* Выравниваем букву внутри овала */
 }
 
-/* Главный заголовок [cite: 1, 11] */
+/* Контейнер заголовка */
+.hero-title-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .hero-title {
-    font-family: var(--font-heading);
+    font-size: clamp(3rem, 7.5vw, 9rem);
     font-weight: 700;
-    font-size: clamp(2.5rem, 8vw, 8rem); /* Адаптивный размер */
     text-transform: uppercase;
-    line-height: 0.9;
-    letter-spacing: -0.03em;
-    margin-bottom: 2.5rem;
+    line-height: 1.05; /* Увеличили, чтобы не слипалось */
+    letter-spacing: -0.04em;
+    text-align: center;
 }
 
-/* Контейнеры для эффекта появления текста снизу вверх */
 .hero-title .line {
     display: block;
     overflow: hidden;
@@ -131,16 +116,16 @@ body {
 
 .hero-title .word {
     display: inline-block;
-    transform: translateY(110%); /* Спрятано в начале */
+    transform: translateY(110%);
 }
 
-/* Подзаголовок */
+/* Подзаголовок (внизу экрана) */
 .hero-subtitle {
-    font-family: var(--font-text);
+    font-size: 0.75rem;
     font-weight: 400;
-    font-size: clamp(0.7rem, 1.2vw, 1rem);
     text-transform: uppercase;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.3em;
     opacity: 0;
-    color: rgba(245, 245, 245, 0.6);
+    text-align: center;
+    color: rgba(245, 245, 245, 0.4);
 }
